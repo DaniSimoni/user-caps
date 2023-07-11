@@ -1,7 +1,7 @@
 export const LoginPage = () => {
     return (
         <>
-            <p>oi</p>
+            <p>oi LoginPage</p>
         </>
     )
 }

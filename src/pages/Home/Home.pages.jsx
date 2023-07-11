@@ -1,7 +1,7 @@
 export const HomePage = () => {
     return (
         <>
-            <p>oi</p>
+            <p>oi home</p>
         </>
     )
 }

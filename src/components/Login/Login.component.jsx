@@ -9,6 +9,7 @@ const redirectToLogin = () => {
 
     return (
         <form onSubmit={redirectToLogin}>
+            <legend>Login</legend>
         <div className="imput-group">
             <label htmlFor="email">E-mail</label>
             <input type="text" id="email" placeholder="Digite seu email"/>

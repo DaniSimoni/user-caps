@@ -1,7 +1,10 @@
+import { FormLoginComponents } from './../../components/Login/Login.component';
+
+
 export const LoginPage = () => {
     return (
         <>
-            <p>oi LoginPage</p>
+           <FormLoginComponents/>
         </>
     )
 }

@@ -1,25 +1,50 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 
-export const FormLoginComponents = () => {
-const navigate = useNavigate();
+import * as Styled from './Login.style';
+import { useState } from 'react';
+import { InputComponent } from '../Form/Input/Input.component';
 
-const redirectToLogin = () => {
+export const FormLoginComponent = () => {
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const navigate = useNavigate();
+
+  const isDisabled = () => {
+    return !data.email || !data.password || !data.email.includes('@') || data.password.length < 8;
+  }
+
+  const handleInput = (event) => {
+    event.preventDefault();
+    const { value, id } = event.target;
+
+    setData({...data, [id]: value});
+  }
+
+  const redirectToHome = () => {
     navigate('/home')
-}
+  }
 
-    return (
-        <form onSubmit={redirectToLogin}>
-            <legend>Login</legend>
-        <div className="imput-group">
-            <label htmlFor="email">E-mail</label>
-            <input type="text" id="email" placeholder="Digite seu email"/>
-        </div>
-        <div className="imput-group">
-            <label htmlFor="password">Senha</label>
-            <input type="password" id="password" placeholder="Digite sua senha"/>
-        </div>
+  return(
+    <Styled.Form onSubmit={redirectToHome}>
+      <Styled.Header>
+        <Styled.Title>Login</Styled.Title>
+        <Styled.SubTitle>Texto</Styled.SubTitle>
+      </Styled.Header>
 
-        <button type="submit">Logar</button>
-        </form>
-    )
+      <Styled.InputGroup>
+        <InputComponent id='email' type='email' placeholder='Digite seu E-mail' label='E-mail'/>
+        <InputComponent id='repeat-password' type='password' placeholder='Digite sua Senha' label='Senha'/>
+      </Styled.InputGroup>
+
+      <Styled.Button type='submit' disabled={isDisabled()}>Entrar</Styled.Button>
+
+      <Styled.Action>
+        <Styled.EsqueciSenha>Esqueci minha senha</Styled.EsqueciSenha>
+        <Styled.Button $outlined={true} type='button'>Criar conta</Styled.Button>
+      </Styled.Action>
+    </Styled.Form>
+  )
 }

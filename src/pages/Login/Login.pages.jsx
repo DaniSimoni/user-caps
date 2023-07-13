@@ -1,7 +1,11 @@
+import { FormLoginComponent } from './../../components/Login/Login.component';
+import * as Styled from './Login.style'
+
+
 export const LoginPage = () => {
     return (
-        <>
-            <p>oi LoginPage</p>
-        </>
+        <Styled.Login>
+           <FormLoginComponent/>
+        </Styled.Login>
     )
 }

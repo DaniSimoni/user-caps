@@ -60,5 +60,5 @@ export const Icon = styled.button`
     align-items: center;
     justify-content: center;
 
-    color: #5281DC;
+    color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
 `

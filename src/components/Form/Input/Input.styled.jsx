@@ -8,6 +8,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 0.5px;
+color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
 `
 export const Label = styled.label`
 display: flex;
@@ -19,6 +20,7 @@ font-size: 0.75rem;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
+color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
 `
 export const Input = styled.input`
 display: flex;
@@ -28,6 +30,7 @@ align-self: stretch;
 border-radius: 5px;
 border: 1px solid #5281DC;
 width: 100%;
+color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
 `
 export const TextArea = styled.textarea`
 display: flex;
@@ -36,11 +39,13 @@ align-items: flex-start;
 align-self: stretch;
 border-radius: 5px;
 border: 1px solid #5281DC;
+color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
 `
 
 export const InputContainer = styled.div`
     position: relative;
     width: 100%;
+    
 `
 
 export const Icon = styled.button`

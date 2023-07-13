@@ -5,7 +5,7 @@ import { MdVisibility, MdVisibilityOff} from 'react-icons/md'
 
 
 
-export const InputComponent = ({label, type, id, placeholder}) => {
+export const InputComponent = ({label, type, id, placeholder, register, error}) => {
 
     const [showPassword, setShowPassword] = useState('false');
 
@@ -16,13 +16,13 @@ export const InputComponent = ({label, type, id, placeholder}) => {
     return (
         <>
             <Styled.InputGroup>
-                <Styled.Label htmlFor={ id }>{ label }</Styled.Label>
+                <Styled.Label $color={error && 'danger'} htmlFor={ id }>{ label }</Styled.Label>
 
                 { type !== 'textarea' &&
                 <Styled.InputContainer>
-                    <Styled.Input type={ showPassword ? 'text' : type} id={id} placeholder={placeholder} className='Input'></Styled.Input>
+                    <Styled.Input $color={error && 'danger'} type={ showPassword ? 'text' : type} id={id} placeholder={placeholder} {... register}></Styled.Input>
                     { type === 'password' && 
-                        <Styled.Icon type='button' onClick={handleShowPassword}>
+                        <Styled.Icon $color={error && 'danger'} type='button' onClick={handleShowPassword}>
                             { !showPassword
                                 ? <MdVisibility/>
                                 : <MdVisibilityOff/> 
@@ -32,7 +32,7 @@ export const InputComponent = ({label, type, id, placeholder}) => {
                 }
 
                 { type === 'textarea' &&
-                    <Styled.TextArea type={type} id={id} placeholder={placeholder} className='TextArea'></Styled.TextArea>
+                    <Styled.TextArea $color={error && 'danger'} type={type} id={id} placeholder={placeholder} {... register}></Styled.TextArea>
                 }
             </Styled.InputGroup>
         </>
@@ -44,4 +44,6 @@ InputComponent.prototype = {
     type: PropTypes.string,
     id: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
+    register: PropTypes.any,
+    error: PropTypes.any,
 }

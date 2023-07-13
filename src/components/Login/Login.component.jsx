@@ -1,45 +1,59 @@
 import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form"
 
 import * as Styled from './Login.style';
-import { useState } from 'react';
 import { InputComponent } from '../Form/Input/Input.component';
 
 export const FormLoginComponent = () => {
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
 
   const navigate = useNavigate();
 
-  const isDisabled = () => {
-    return !data.email || !data.password || !data.email.includes('@') || data.password.length < 8;
-  }
-
-  const handleInput = (event) => {
-    event.preventDefault();
-    const { value, id } = event.target;
-
-    setData({...data, [id]: value});
+  const submitForm = (data) => {
+    console.log(data)
   }
 
   const redirectToHome = () => {
-    navigate('/home')
+    navigate('./home')
   }
 
   return(
-    <Styled.Form onSubmit={redirectToHome}>
+    <Styled.Form onSubmit={handleSubmit(submitForm)}>
       <Styled.Header>
         <Styled.Title>Login</Styled.Title>
-        <Styled.SubTitle>Texto</Styled.SubTitle>
+        <Styled.SubTitle>Para acessar o sistema digite seu email e sua senha.</Styled.SubTitle>
       </Styled.Header>
 
       <Styled.InputGroup>
-        <InputComponent id='email' type='email' placeholder='Digite seu E-mail' label='E-mail'/>
-        <InputComponent id='repeat-password' type='password' placeholder='Digite sua Senha' label='Senha'/>
+          <InputComponent
+          id='email' 
+          type='email' 
+          placeholder='Digite seu E-mail' 
+          label='E-mail'
+          register={{...register('email', {
+            required: true, 
+            validate: {matchPath: (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v)}
+          })
+        }}
+        error={ errors.email }
+          />
+
+          <InputComponent 
+          id='repeat-password' 
+          type='password' 
+          placeholder='Digite sua Senha' 
+          label='Senha'
+          register={{...register('password', {required: true, minLength: 8})}}
+          
+          />
       </Styled.InputGroup>
 
-      <Styled.Button type='submit' disabled={isDisabled()}>Entrar</Styled.Button>
+      <Styled.Button $active={ !errors.email && !errors.password } type='submit' disabled={ errors.email || errors.password }>Entrar</Styled.Button>
 
       <Styled.Action>
         <Styled.EsqueciSenha>Esqueci minha senha</Styled.EsqueciSenha>

@@ -49,14 +49,16 @@ export const FormLoginComponent = () => {
       }
 
       password === user.password
-      ? redirectToHome()
-      : alert('Estelionatário');
-   
-      
+      ? redirectToHome(user)
+      : alert('Ops! Dados inválidos.');
   }
 
-  const redirectToHome = () => {
-    navigate('./home')
+  const redirectToHome = (user) => {
+    setAuth ({
+      user,
+      isLogged: true,
+    });
+      navigate ('/')
   }
 
   return(
